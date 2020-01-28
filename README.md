@@ -29,7 +29,7 @@
 APIサーバは Swagger Editor にてI仕様を定義し Swagger-CodeGenerator にて自動生成しています。
 
 - swagger 定義ファイル
-    - /api-mock/swagger.yaml
+    - [/api-mock/swagger.yaml](/api-mock/swagger.yaml)
 
 ## 起動方法
 
@@ -43,22 +43,22 @@ APIサーバは Swagger Editor にてI仕様を定義し Swagger-CodeGenerator �
 ### 手順
 
 1. 下記ファイルを同一ディレクトリに ".env" というファイル名でコピーします。
-    - /app/config/.env.default
+    - [/app/config/.env.default](/app/config/.env.default)
 1. 同様に下記ファイルを "app.php" と言うファイル名でコピーします。
-    - /app/config/.env.default/app.default.php
+    - [/app/config/.env.default/app.default.php](/app/config/.env.default/app.default.php)
 1. 下記コマンドを実行します。
 ```bash
-cd {プロジェクトルート}
-docker-compose up -d
+$ cd {プロジェクトルート}
+$ docker-compose up -d
 
 ... Docker の構築プロセス ...
 
-docker exec -it k-test-app /bin/sh
-composer install
+$ docker exec -it k-test-app /bin/sh
+$ composer install
 
 ... composer インストールプロセス ...
 
-exit
+$ exit
 ```
 
 以上で起動完了です。
@@ -101,8 +101,8 @@ curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header
 
 ## アプリケーションサーバの主な実装ファイル
 
-- /app/src/Controller/AiAnalysisLogController.php
+- [/app/src/Controller/AiAnalysisLogController.php](/app/src/Controller/AiAnalysisLogController.php)
 
-- /app/src/Model/Entity/AiAnalysisLogModel.php
+- [/app/src/Model/Entity/AiAnalysisLogModel.php](/app/src/Model/Entity/AiAnalysisLogModel.php)
 
-- /app/src/Service/AiAnalysisService.php
+- [/app/src/Service/AiAnalysisService.php](/app/src/Service/AiAnalysisService.php)
