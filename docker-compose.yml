@@ -1,0 +1,59 @@
+version: '2'
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+services:
+  mock:
+    build:
+      context: ./api-mock
+      dockerfile: Dockerfile
+    container_name: k-test-api-mock
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+    restart: always
+    ports:
+      - "8090:8080"
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
+    container_name: k-test-db
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.20
+    restart: always
+    environment:
+      MYSQL_DATABASE: k-test
+      MYSQL_USER: k-test
+      MYSQL_PASSWORD: k-test
+      MYSQL_ROOT_PASSWORD: root
+      TZ: 'Asia/Tokyo'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/sql/initdb.d:/docker-entrypoint-initdb.d
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: k-test-app
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.30
+    restart: always
+    depends_on:
+      - db
+      - mock
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8080:80"
+

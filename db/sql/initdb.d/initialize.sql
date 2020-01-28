@@ -1,0 +1,1 @@
+-- ALTER USER 'k-test'@'%' IDENTIFIED WITH mysql_native_password BY 'P@ssw0rd';
