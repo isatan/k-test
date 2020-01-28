@@ -8,8 +8,7 @@ use Cake\ORM\TableRegistry;
 
 /**
  * AiAnalysisLog の Entity クラス。
- * CakeのEntityを拡張せず、内部でラップ保持する。
- * Entityだとコンストラクタの引数が全プロパティの配列となり、null プロパティが扱いにくいので利用を断念。
+ * Cake の Entity を拡張するとコンストラクタの引数が全プロパティの配列となり扱いにくいので Entity をラップする。
  */
 class AiAnalysisLogModel
 {
