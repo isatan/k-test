@@ -9,8 +9,9 @@
 アプリケーションの実行には RestAPI をコールします。
 
 ```
-[ アプリケーションサーバ ] ─+─ [ APIサーバ ]
-                        └─ [ RDBサーバ ]
+[ アプリケーションサーバ ]
+    ├── [ APIサーバ ]
+    └── [ RDBサーバ ]
 ```
 
 # ソフトウェア構成
@@ -31,16 +32,16 @@ APIサーバは Swagger Editor にてI仕様を定義し Swagger-CodeGenerator �
 - swagger 定義ファイル
     - [/api-mock/swagger.yaml](/api-mock/swagger.yaml)
 
-## 起動方法
+# 起動方法
 
 各サーバは Docker にてコンテナ定義をしています。ここでは Docker の利用による起動手順を記載します。
 
-### 動作確認環境
+## 動作確認環境
 
 - macOS Catalina 10.15.2
 - Docker Desktop 2.1.0.5
 
-### 手順
+## 手順
 
 1. 下記ファイルを同一ディレクトリに ".env" というファイル名でコピーします。
     - [/app/config/.env.default](/app/config/.env.default)
@@ -63,7 +64,7 @@ $ exit
 
 以上で起動完了です。
 
-## 各エンドポイント
+# 各エンドポイント
 
 以下はローカルマシンからの各エンドポイントです。
 
@@ -80,10 +81,6 @@ curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header
 - アプリケーションサーバAPI
     - [http://localhost:8080/rest/v1/analyse](http://localhost:8080/rest/v1/analyse)
 
-```curl
-curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' -d 'image_path=%2Fhogehoge' 'http://localhost:8080/rest/v1/analyse'
-```
-
 - MySQLサーバ
     - host
         - localhost
@@ -98,8 +95,17 @@ curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header
     - root password
         - root
 
+# 実行方法
 
-## アプリケーションサーバの主な実装ファイル
+下記 curl コマンドにて アプリケーションサーバの API を実行可能です。
+
+```curl
+curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' -d 'image_path=%2Fhogehoge' 'http://localhost:8080/rest/v1/analyse'
+```
+
+保存されたデータは直接DBを参照してください。
+
+# アプリケーションサーバの主な実装ファイル
 
 - [/app/src/Controller/AiAnalysisLogController.php](/app/src/Controller/AiAnalysisLogController.php)
 
